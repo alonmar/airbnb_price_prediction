@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block hero %}
+
+<section class="hero hero-md d-flex justify-content-center align-items-center">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-6 col-md-10 col-12 d-flex justify-content-center align-items-center">
+        
+          <form class="g-3" method="post">
+            {{ form.csrf_token }}
+            {% for field, errors in form.errors.items() %}
+            <div class="alert alert-danger">
+              {{ form[field].label }}: {{ ', '.join(errors) }}
+            </div>
+            {% endfor %}
+            <div class="col-auto">
+              {{form.accommodates.label()}}{{form.accommodates(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.bathrooms.label()}}{{form.bathrooms(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.cleaning_fee.label()}}{{form.cleaning_fee(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.review_scores_rating.label()}}{{form.review_scores_rating(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.bedrooms.label()}}{{form.bedrooms(class="form-control")}}              
+            </div>
+            <div class="col-auto">
+              {{form.beds.label()}}{{form.beds(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.property_type.label()}}{{form.property_type(class="form-control")}}              
+            </div>
+            <div class="col-auto">
+              {{form.room_type.label()}}{{form.room_type(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.bed_type.label()}}{{form.bed_type(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.cancellation_policy.label()}}{{form.cancellation_policy(class="form-control")}}
+            </div>
+            <div class="col-auto">
+              {{form.city.label()}}{{form.city(class="form-control")}}
+            </div>
+            <br>
+            {{form.submit(class="btn btn-md btn-primary btn-block")}}
+          </form>
+        
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="hero-image" data-aos="fade-up" data-aos-delay="300">
+          <h2>
+            Fill the data to know the price<strong>prediction</strong> 
+          </h2>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block hero %}
+
+<section class="hero hero-bg d-flex justify-content-center align-items-center">
+  <div class="container">
+       <div class="row">
+
+           <div class="col-lg-6 col-md-10 col-12 d-flex flex-column justify-content-center align-items-center">
+                 <div class="hero-text">
+
+                      {% if log_value_house%}
+                      <h1 class="text-white" data-aos="fade-up">The price predict is:</h1>
+                      <h1 class="text-white" data-aos="fade-up">{{log_value_house}} (in log scale)</h1>
+                      {% else %}
+                      <h1 class="text-white" data-aos="fade-up">What would you like to do?</h1>
+                      {% endif %}
+                      
+
+                      <a href="{{ url_for('predict_price') }}" class="custom-btn btn-bg btn mt-3" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fa fa-home" aria-hidden="true"></i> Price prediction</a>
+                      <a href="{{ url_for('under_over_price') }}" class="custom-btn btn-bg btn mt-3" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fa fa-home" aria-hidden="true"></i> Under or over price</a>
+
+                      <strong class="d-block py-3 pl-5 text-white" data-aos="fade-up" data-aos-delay="200"></strong>
+                 </div>
+           </div>
+           <div class="col-lg-6 col-12">
+             <div class="hero-image" data-aos="fade-up" data-aos-delay="300">
+               <img src="{{url_for('static', filename='images/smarthome.gif')}}" style="border-radius: 50%" 
+               width="800" height="800"
+               class="img-fluid" alt="working girl">
+             </div>
+           </div>
+
+       </div>
+  </div>
+</section>
+
+{% endblock %}
