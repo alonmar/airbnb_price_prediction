@@ -130,5 +130,6 @@ def under_over_price():
  
 
 if __name__ == '__main__':
+    db.create_all()
     model_load = joblib.load('xgboost_final_model.pkl')
     app.run(debug=False, host='0.0.0.0') # This statement starts the server on your local machine.
