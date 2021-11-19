@@ -75,10 +75,10 @@ def predict_price():
         df = pd.DataFrame(data=data, index=[0])
         print(df)
 
-        log_value_house = model_load.predict(df )
+        log_price_house = model_load.predict(df )
 
         return render_template("index.html", 
-                                log_value_house=round(log_value_house[0], 3))
+                                log_value_house=round(log_price_house[0], 3))
 
     return render_template("predict_price.html", form=form)
 
@@ -97,7 +97,6 @@ def under_over_price():
         db.session.commit()
         
         # Write data values
-        data['log_price'] = form.log_price.data
         data['accommodates'] = form.accommodates.data
         data['bathrooms'] = form.bathrooms.data
         data['cleaning_fee'] = form.cleaning_fee.data
@@ -118,9 +117,14 @@ def under_over_price():
 
         log_price_house = model_load.predict(df)
 
-        return render_template("show_price.html", 
-                                log_value_house=log_price_house[0],
-                                actual_price = data['log_price'])
+        status_predict = "Over"
+        if log_price_house > form.log_price.data:
+            status_predict = "Under"
+
+        return render_template("index.html", 
+                                log_value_house=round(log_price_house[0], 3),
+                                actual_price=round(form.log_price.data, 3),
+                                status_predict = status_predict)
 
     return render_template("under_over_price.html", form=form)
  
