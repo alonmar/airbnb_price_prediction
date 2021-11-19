@@ -2,6 +2,8 @@
 from flask import Flask, render_template # importing the flask class
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy, model
+from sqlalchemy import Boolean, Column, ForeignKey, DateTime, \
+    Integer, String, Text, Float
 import config
 
 # Load train model
@@ -11,16 +13,30 @@ import pandas as pd
 # Forms
 from forms import FormHouseSpecs
 
-# Models
-from models import *
-
-
 app = Flask(__name__) # creating an instance of the Flask class
 
 app.config.from_object(config)
 Bootstrap(app)
 db = SQLAlchemy(app)
 
+# Models
+class HouseSpecs(db.Model):
+    """HouseSpecs"""
+    __tablename__ = 'houses_specs'
+    id = Column(Integer, primary_key=True)
+    accommodates = Column(Integer)
+    bathrooms = Column(Integer)
+    cleaning_fee = Column(Boolean, default=False)
+    review_scores_rating = Column(Integer)
+    beds = Column(Integer)
+    property_type = Column(String(100))
+    room_type = Column(String(100))
+    bed_type = Column(String(100))
+    cancellation_policy = Column(String(100))
+    city = Column(String(100))
+
+    def __repr__(self):
+        return (u'<{self.__class__.__name__}: {self.id}>'.format(self=self))
 
 data = {'accommodates'                 : 0,
         'bathrooms'                    : 0,
@@ -55,7 +71,6 @@ def predict_price():
     form = FormHouseSpecs()
 
     if form.validate_on_submit():
-        from models import HouseSpecs
         
         #Save values in database
         house = HouseSpecs()
@@ -96,7 +111,6 @@ def under_over_price():
     form = FormHouseSpecs()
 
     if form.validate_on_submit():
-        from models import HouseSpecs
         
         #Save values in database
         house = HouseSpecs()
