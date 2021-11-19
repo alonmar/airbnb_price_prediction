@@ -1,10 +1,18 @@
+# Flask 
 from flask import Flask, render_template # importing the flask class
-import config
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy, model
+import config
+
+# Load train model
 import joblib 
 import pandas as pd
+
+# Forms
 from forms import FormHouseSpecs
+
+# Models
+from models import *
 
 
 app = Flask(__name__) # creating an instance of the Flask class
