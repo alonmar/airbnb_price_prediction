@@ -19,6 +19,8 @@ app.config.from_object(config)
 Bootstrap(app)
 db = SQLAlchemy(app)
 
+model_load = joblib.load('xgboost_final_model.pkl')
+
 # Models
 class HouseSpecs(db.Model):
     """HouseSpecs"""
